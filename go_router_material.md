@@ -149,3 +149,51 @@ class DetailsPage extends StatelessWidget {
   }
 }
 ```
+
+---
+
+## 5. Named Routes and Path Parameters
+
+Using names for routes and parameters in the path makes your navigation code more robust and maintainable.
+
+### Defining Named Routes
+Assign a unique `name` string to a `GoRoute`.
+
+```dart
+// In your GoRouter configuration
+GoRoute(
+  name: 'user_details', // Route name
+  path: '/user/:userId', // Path with a parameter
+  builder: (context, state) {
+    // ...
+  },
+),
+```
+
+### Navigating with Names
+Use `context.goNamed()` or `context.pushNamed()`. This is safer than using raw paths.
+
+```dart
+// Pass the value for ':userId' in the pathParameters map
+context.goNamed(
+  'user_details',
+  pathParameters: {'userId': '123'},
+  extra: 'Some extra data',
+);
+```
+
+### Receiving Path Parameters
+In the route's `builder`, path parameters are available in the `state.pathParameters` map.
+
+```dart
+// In your GoRouter configuration
+GoRoute(
+  name: 'user_details',
+  path: '/user/:userId',
+  builder: (context, state) {
+    // Extract the parameter value by its key
+    final String userId = state.pathParameters['userId']!;
+    return UserDetailsPage(userId: userId);
+  },
+),
+```
