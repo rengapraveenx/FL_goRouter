@@ -1,11 +1,11 @@
 # 🗺️ GoRouter in Flutter — Zero to Hero Roadmap
 
 ## 🔰 Basics
-- [ ] **What & Why:** Understand GoRouter's declarative API vs. the imperative Navigator 1.0.
-- [ ] **Installation:** Add `go_router` to `pubspec.yaml` and configure the `GoRouter` instance.
-- [ ] **Simple Routes:** Define your first static routes for pages like `/home` and `/about`.
-- [ ] **Navigation (`go` vs. `push`):** Learn when to rebuild the stack with `context.go()` vs. adding to it with `context.push()`.
-- [ ] **Passing Data:** Use the `extra` parameter to pass complex objects between routes.
+- [x] **What & Why:** Understand GoRouter's declarative API vs. the imperative Navigator 1.0.
+- [x] **Installation:** Add `go_router` to `pubspec.yaml` and configure the `GoRouter` instance.
+- [x] **Simple Routes:** Define your first static routes for pages like `/home` and `/about`.
+- [x] **Navigation (`go` vs. `push`):** Learn when to rebuild the stack with `context.go()` vs. adding to it with `context.push()`.
+- [x] **Passing Data:** Use the `extra` parameter to pass complex objects between routes.
 
 ---
 
