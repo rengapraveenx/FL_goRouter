@@ -12,10 +12,10 @@
 ## ⚙️ Intermediate
 - [x] 6 **Named Routes:** Use names to navigate, avoiding hardcoded URL strings.
 - [x] 7 **Path & Query Parameters:** Extract dynamic data from paths (`/users/:id`) and query strings (`/search?q=term`).
-- [ ] 8 **Returning Data:** Pass data from a child route back to a parent using `context.pop(result)`.
-- [ ] 9 **`GoRouterState`:** Access route-specific information like parameters, path, and location.
-- [ ] 10 **`ShellRoute`:** Create persistent UI (like a `BottomNavigationBar` or `Drawer`) for a group of routes.
-- [ ] 11 **Redirection & Guards:** Protect routes by redirecting based on app state (e.g., user authentication).
+- [x] 8 **Returning Data:** Pass data from a child route back to a parent using `context.pop(result)`.
+- [x] 9 **`GoRouterState`:** Access route-specific information like parameters, path, and location.
+- [x] 10 **`ShellRoute`:** Create persistent UI (like a `BottomNavigationBar` or `Drawer`) for a group of routes.
+- [x] 11 **Redirection & Guards:** Protect routes by redirecting based on app state (e.g., user authentication).
 - [ ] 12 **Error Handling:** Implement a custom "404 - Page Not Found" screen using `errorBuilder`.
 
 ---
