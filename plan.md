@@ -12,6 +12,7 @@
 ## ⚙️ Intermediate
 - [x] **Named Routes:** Use names to navigate, avoiding hardcoded URL strings.
 - [x] **Path & Query Parameters:** Extract dynamic data from paths (`/users/:id`) and query strings (`/search?q=term`).
+- [ ] **Returning Data:** Pass data from a child route back to a parent using `context.pop(result)`.
 - [ ] **`GoRouterState`:** Access route-specific information like parameters, path, and location.
 - [ ] **`ShellRoute`:** Create persistent UI (like a `BottomNavigationBar` or `Drawer`) for a group of routes.
 - [ ] **Redirection & Guards:** Protect routes by redirecting based on app state (e.g., user authentication).

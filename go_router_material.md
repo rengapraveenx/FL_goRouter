@@ -215,3 +215,44 @@ This is a critical distinction for passing data correctly.
 
 -   Use **`pathParameters`** when the data is a simple, unique identifier that you want to be able to link to directly.
 -   Use **`extra`** when you need to pass a complex Dart object or temporary state that doesn't need to be represented in the URL.
+
+---
+
+## 7. Returning Data from a Route (Child to Parent)
+
+To pass data backward from a child route to a parent, you `await` the result of `context.push` and pass the data back using `context.pop`.
+
+### 1. Pushing and Awaiting a Result
+
+On the parent page, use an `async` function to `await` the result from `context.push`. The `push` method returns a `Future` that completes when the child page is popped.
+
+```dart
+// In the parent widget (e.g., HomePage)
+ElevatedButton(
+  onPressed: () async {
+    // Push the new route and wait for a result
+    final result = await context.push<String>('/selection');
+
+    // When the result comes back, update the state
+    if (result != null) {
+      setState(() {
+        _resultFromSelection = result;
+      });
+    }
+  },
+  child: const Text('Select Data'),
+),
+```
+
+### 2. Popping and Sending a Result
+
+On the child page, pass the data you want to send back as an argument to `context.pop()`.
+
+```dart
+// In the child widget (e.g., SelectionPage)
+ElevatedButton(
+  // Pass the result data back in the pop method
+  onPressed: () => context.pop('This is the result!'),
+  child: const Text('Return Data'),
+),
+```

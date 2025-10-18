@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// 1. Add names to routes and define path parameters
+// 1. Add the new route
 final _router = GoRouter(
   routes: [
     GoRoute(
-      name: 'home', // Route name
+      name: 'home',
       path: '/',
       builder: (context, state) => const HomePage(),
     ),
     GoRoute(
-      name: 'user_details', // Route name
-      path: '/user/:userId', // Path parameter: userId
+      name: 'user_details',
+      path: '/user/:userId',
       builder: (context, state) {
-        // Extract data from path parameter and 'extra'
         final userId = state.pathParameters['userId']!;
         final message = state.extra as String? ?? 'No message';
         return UserDetailsPage(userId: userId, message: message);
       },
+    ),
+    GoRoute(
+      path: '/selection',
+      builder: (context, state) => const SelectionPage(),
     ),
   ],
 );
@@ -41,8 +44,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+// 2. Convert HomePage to a StatefulWidget
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String _resultFromSelection = 'No result yet';
 
   @override
   Widget build(BuildContext context) {
@@ -52,24 +63,33 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              'Result: $_resultFromSelection',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
-              // 2. Navigate using goNamed with path parameters
+              // 3. Push and await the result
+              onPressed: () async {
+                final result = await context.push<String>('/selection');
+                if (result != null) {
+                  setState(() {
+                    _resultFromSelection = result;
+                  });
+                }
+              },
+              child: const Text('Select Data from Child Page'),
+            ),
+            const SizedBox(height: 40),
+            const Divider(),
+            const SizedBox(height: 20),
+            ElevatedButton(
               onPressed: () => context.goNamed(
                 'user_details',
                 pathParameters: {'userId': '123'},
                 extra: 'Hello User 123 from Home!',
               ),
               child: const Text('Go to User 123 Details (go)'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              // 3. Navigate using pushNamed with path parameters
-              onPressed: () => context.pushNamed(
-                'user_details',
-                pathParameters: {'userId': '456'},
-                extra: 'Hello User 456 from Home!',
-              ),
-              child: const Text('Push User 456 Details (push)'),
             ),
           ],
         ),
@@ -78,7 +98,35 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// 4. Renamed and updated the details page
+// 4. Create the SelectionPage
+class SelectionPage extends StatelessWidget {
+  const SelectionPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Select an Option')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              // 5. Pop with a result
+              onPressed: () => context.pop('Option A'),
+              child: const Text('Return "Option A"'),
+            ),
+            ElevatedButton(
+              onPressed: () => context.pop('Option B'),
+              child: const Text('Return "Option B"'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 class UserDetailsPage extends StatelessWidget {
   final String userId;
   final String message;
