@@ -197,3 +197,21 @@ GoRoute(
   },
 ),
 ```
+
+---
+
+## 6. `pathParameters` vs. `extra`
+
+This is a critical distinction for passing data correctly.
+
+| Feature | `pathParameters` | `extra` |
+| :--- | :--- | :--- |
+| **Visibility** | Part of the URL path, visible to the user (e.g., `/users/123`) | Not part of the URL; hidden from the user |
+| **Data Type** | Always a `String` | Can be **any** Dart `Object` |
+| **Purpose** | To identify a specific resource (e.g., a unique ID) | To pass complex data or temporary state |
+| **Persistence** | Persistent (works with bookmarks, history, deep links) | Not persistent (lost on page refresh) |
+
+### When to Use Which?
+
+-   Use **`pathParameters`** when the data is a simple, unique identifier that you want to be able to link to directly.
+-   Use **`extra`** when you need to pass a complex Dart object or temporary state that doesn't need to be represented in the URL.
